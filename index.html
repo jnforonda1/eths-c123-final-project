@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American on Paper — A Storytelling Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c2321;
+    --ink-soft: #4a5450;
+    --paper: #f2eee3;
+    --paper-raised: #ffffff;
+    --line: #d8d2c1;
+    --accent: #3a6b6f;
+    --accent-soft: #e4ece9;
+    --flag: #9c4a3b;
+    --serif: 'IBM Plex Serif', Georgia, serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: var(--flag); }
+
+  a:focus-visible,
+  button:focus-visible,
+  audio:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+
+  header.hero {
+    padding: 96px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .boot-line {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    margin-bottom: 28px;
+    min-height: 1.4em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid var(--accent);
+    width: 0;
+    animation: type 2.1s steps(38, end) forwards, blink 0.8s step-end infinite;
+  }
+
+  @keyframes type {
+    from { width: 0; }
+    to { width: 34ch; }
+  }
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+
+  .subhead {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0;
+  }
+
+  /* ---------- SECTIONS ---------- */
+
+  section.block {
+    padding: 64px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  html.js section.block {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  html.js section.block.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section.block:last-of-type { border-bottom: none; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+
+  .tag.flagged {
+    color: var(--flag);
+    background: #f5e6e2;
+  }
+
+  h2.block-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.7rem;
+    margin: 0 0 22px;
+    letter-spacing: -0.005em;
+  }
+
+  section.block p {
+    margin: 0 0 18px;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+
+  section.block p:last-child { margin-bottom: 0; }
+
+  blockquote {
+    margin: 28px 0;
+    padding: 4px 0 4px 20px;
+    border-left: 2px solid var(--accent);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 1rem;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+
+  /* ---------- AUDIO MODULE ---------- */
+
+  .player {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px 22px 18px;
+    margin-top: 22px;
+  }
+
+  .player-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  audio {
+    width: 100%;
+    height: 38px;
+  }
+
+  .player-note {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  details.transcript {
+    margin-top: 16px;
+    font-family: var(--serif);
+  }
+
+  details.transcript summary {
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  details.transcript div {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- SOURCES ---------- */
+
+  .source-entry {
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.98rem;
+  }
+
+  .source-entry:last-child { padding-bottom: 0; }
+
+  .source-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  footer.close {
+    padding: 48px 0 80px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 560px) {
+    header.hero { padding: 64px 0 44px; }
+    section.block { padding: 44px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .boot-line { width: 34ch; border-right: none; }
+    section.block { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="boot-line">status check: citizenship &ne; belonging</div>
+    <h1 class="title">American on Paper</h1>
+    <p class="subhead">A story about the gap between having citizenship and actually being treated like you belong.</p>
+  </header>
+
+  <section class="block" id="issue">
+    <span class="tag flagged">status: unresolved</span>
+    <h2 class="block-title">The Issue</h2>
+    <p>I'm Filipino American, and my family has spent three generations caught in a specific gap. Even with full documentation, people in the room still make up their minds about you the second they look at you. I didn't have a name for that until this class.</p>
+    <p>It matters to me because I've lived inside it, not fully Filipino, not fully American, treated as an outsider on sight regardless of what any document says. This is my family's story. I'm telling it because the history behind it turned out to be bigger than I expected.</p>
+  </section>
+
+  <section class="block" id="record">
+    <span class="tag">source: verified</span>
+    <h2 class="block-title">The Record</h2>
+    <p>Because the United States colonized the Philippines, Filipinos who migrated here in the early twentieth century weren't classified as foreign immigrants. They were legally U.S. nationals. That status didn't change how they were actually treated. Filipino nationals were still placed at the bottom of agricultural labor, still segregated, still treated as outsiders the moment they were seen (Lee, 2015). That kind of legal status gave people entry into the country without giving the country any real obligation to treat them differently once they were here.</p>
+    <p>Recent research backs up what my family lived through without ever having the language for it. A 2026 study on immigrant youth in Canada found that belonging isn't something a legal status hands you, it's something built through lived, ongoing participation:</p>
+    <blockquote>
+      "developing a sense of belonging and identity... illustrates an affective dimension... of social integration" that is "endlessly being socially produced and assembled."
+      <cite>Guo, Wong &amp; Guo, 2026</cite>
+    </blockquote>
+    <p>Having that status gave people legal entry. It didn't stop the exploitation once they were here.</p>
+  </section>
+
+  <section class="block" id="voice">
+    <span class="tag">testimony: on record</span>
+    <h2 class="block-title">My Voice</h2>
+    <p>I recorded this part myself. Reading the history is one thing. Hearing where it actually landed in a life is a different kind of evidence.</p>
+    <div class="player">
+      <div class="player-label"><span>testimony.mp3</span><span>runtime: —:—</span></div>
+      <audio controls>
+        <source src="testimony.mp3" type="audio/mpeg">
+        Your browser does not support embedded audio. A transcript is available below.
+      </audio>
+      <p class="player-note">// replace testimony.mp3 with your recorded file before publishing</p>
+      <details class="transcript">
+        <summary>View transcript</summary>
+        <div>
+          <p>My family's relationship to being Filipino always felt unique to me, not something I could compare easily to other families. Filipino food got treated as something greasy, something unhealthy, mostly saved for parties instead of being part of regular life at home. My grandma never taught my mom or her siblings Tagalog. My dad came here at fifteen already speaking Ilocano, and I've always wanted to actually learn it. I never followed through, and I still wish I had.</p>
+          <p>My great aunt Soling, who passed away, has a story I only know pieces of. Her older sister was supposed to marry a man in the Philippines and didn't want to, so Soling stepped up and married him instead, and immigrated here to the Bay Area. She spent years working at Lockheed Martin, where she faced real discrimination and harassment on the job. She lived through more than I ever got the full picture of, and I wish I understood her better while she was here.</p>
+          <p>Out near Yosemite, a worker at a small grocery store rudely assumed I wasn't ready to order because I was on my phone. I called it out loud enough that she backed off. A second worker, who was Hispanic, stepped in and smoothed it over by blaming the weather. I understood exactly what he was doing, he lives there and deals with that every day. I was just passing through.</p>
+        </div>
+      </details>
+    </div>
+    <p style="margin-top: 28px;">These four things don't look alike on the surface, a recipe nobody made at home, a language that stopped getting passed down, a great aunt's job, a stranger's assumption in a grocery store. But looking at them together now, I don't see my family's identity as something solid I just inherited. I see it as something that got worn down piece by piece, and something I'm still deciding whether to build back.</p>
+  </section>
+
+  <section class="block" id="pattern">
+    <span class="tag flagged">pattern: recurring</span>
+    <h2 class="block-title">The Pattern, and What Can Be Done</h2>
+    <p>In 1982, Vincent Chin, a full U.S. citizen born in Detroit, was beaten to death by two men who mistook him for Japanese during a wave of anti-Japanese anger in the auto industry. Neither man served a single day in jail. The sentencing judge said on record that "these weren't the kind of men you send to jail." Citizenship didn't protect Chin either. After the sentencing, Chinese, Japanese, Filipino, and Korean communities, groups that had mostly organized separately up to that point, came together and formed American Citizens for Justice, pushing for the first-ever federal civil rights prosecution for a crime against an Asian American.</p>
+    <p>Recent scholarship traces this same pattern forward instead of treating it as settled history. One 2025 literary analysis follows the line directly "from the Page and Chinese Exclusion Acts, through the Cold War 'model minority' myth, to the twenty-first-century commodification of diversity" (Chen &amp; Yu, 2025). The specific labels shift every few decades, but Asian Americans still get lumped together and targeted the same way.</p>
+    <p><strong>What can be done:</strong> I never would have learned any of this, my own family's history included, if I hadn't happened to take this specific class. That shouldn't be left to chance. This material needs to be taught earlier, before it depends on which elective a student stumbles into years later.</p>
+  </section>
+
+  <section class="block" id="sources">
+    <span class="tag">citations: verified</span>
+    <h2 class="block-title">Sources</h2>
+
+    <div class="source-entry">
+      <div class="source-meta">book · history</div>
+      Lee, E. (2015). <em>The Making of Asian America: A History</em>. Simon &amp; Schuster.
+    </div>
+
+    <div class="source-entry">
+      <div class="source-meta">peer-reviewed · journal of youth studies</div>
+      Guo, S., Wong, L., &amp; Guo, Y. (2026). 'Citizenship from below': Integration as assemblage for immigrant young people volunteers in Canada. <em>Journal of Youth Studies, 29</em>(3), 295–311. <a href="https://doi.org/10.1080/13676261.2024.2446969" target="_blank" rel="noopener">https://doi.org/10.1080/13676261.2024.2446969</a>
+    </div>
+
+    <div class="source-entry">
+      <div class="source-meta">peer-reviewed · canadian review of american studies</div>
+      Chen, F., &amp; Yu, S. (2025). Performing the neoliberal body: Alienation, plenitude fantasies, and the ethics of the public in Charles Yu's Interior Chinatown. <em>Canadian Review of American Studies, 55</em>(3), 233–251. <a href="https://doi.org/10.3138/cras-2025-012" target="_blank" rel="noopener">https://doi.org/10.3138/cras-2025-012</a>
+    </div>
+  </section>
+
+  <footer class="close">
+    built by justin foronda &middot; eths c123 &middot; coastline community college
+  </footer>
+
+</div>
+
+<script>
+  // progressive enhancement: only hide-then-reveal if JS and IntersectionObserver
+  // both actually work, so content is never accidentally left invisible.
+  if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('js');
+    const blocks = document.querySelectorAll('section.block');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    blocks.forEach(b => io.observe(b));
+
+    // safety net: reveal anything still hidden after load in case an
+    // observer callback never fires for a section (e.g. it's already
+    // fully in view on a short page and never crosses the threshold).
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        blocks.forEach(b => b.classList.add('in-view'));
+      }, 1200);
+    });
+  }
+</script>
+
+</body>
+</html>
